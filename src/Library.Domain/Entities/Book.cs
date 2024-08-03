@@ -10,12 +10,12 @@ namespace Library.Domain.Entities
         {
         }
 
-        public Book(string title, string summary, string author, string iSBN, int year)
+        public Book(string title, string summary, string author, string isbn, int year)
         {
             Title = title;
             Summary = summary;
             Author = author;
-            ISBN = iSBN;
+            ISBN = isbn;
             Year = year;
             Rentals = new List<Rental>();
         }
