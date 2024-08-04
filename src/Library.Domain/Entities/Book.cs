@@ -12,17 +12,15 @@ namespace Library.Domain.Entities
         {
         }
 
-        public Book(string title, string summary, string isbn, BookLanguageEnum language, DateTime publicationDate, Author author, Publisher publisher)
+        public Book(string title, string summary, string isbn, BookLanguageEnum language, DateTime publicationDate, long authorId, long publisherId)
         {
             Title = title;
             Summary = summary;
             ISBN = isbn;
             Language = language;
             PublicationDate = publicationDate;
-            Author = author;
-            AuthorId = author.Id;
-            Publisher = publisher;
-            PublisherId = publisher.Id;
+            AuthorId = authorId;
+            PublisherId = publisherId;
             Rentals = new List<Rental>();
         }
 

@@ -9,12 +9,10 @@ namespace Library.Domain.Entities
         {
         }
 
-        public Rental(Book book, Member member)
+        public Rental(long bookId, long memberId)
         {
-            Book = book;
-            BookId = book.Id;
-            Member = member;
-            MemberId = member.Id;
+            BookId = bookId;
+            MemberId = memberId;
         }
 
         public long BookId { get; private set; }

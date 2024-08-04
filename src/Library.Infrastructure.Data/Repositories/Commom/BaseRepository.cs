@@ -6,35 +6,37 @@ namespace Library.Infrastructure.Data.Repositories.Commom
 {
     public abstract class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : Entity
     {
-        private readonly LibraryDbContext _context;
-
-        protected BaseRepository(LibraryDbContext context)
-        {
-            _context = context;
-        }
-
         public async Task CreateAsync(TEntity entity)
         {
-            _context.Set<TEntity>().Add(entity);
-            await _context.SaveChangesAsync();
+            using (var context = new LibraryDbContext())
+            {
+                context.Set<TEntity>().Add(entity);
+                await context.SaveChangesAsync();
+            }
         }
 
         public async Task<TEntity> GetAsync(long id)
         {
-            return await _context.Set<TEntity>().FindAsync(id);
+            using (var context = new LibraryDbContext())
+            {
+                return await context.Set<TEntity>().FindAsync(id);
+            }
         }
 
         public async Task UpdateAsync(TEntity entity)
         {
-            var dbEntity = await _context.Set<TEntity>().FindAsync(entity.Id);
-
-            if (dbEntity == null)
+            using (var context = new LibraryDbContext())
             {
-                return;
-            }
+                var dbEntity = await context.Set<TEntity>().FindAsync(entity.Id);
 
-            _context.Entry(dbEntity).CurrentValues.SetValues(entity);
-            await _context.SaveChangesAsync();
+                if (dbEntity == null)
+                {
+                    return;
+                }
+
+                context.Entry(dbEntity).CurrentValues.SetValues(entity);
+                await context.SaveChangesAsync();
+            }
         }
     }
 }
