@@ -5,10 +5,12 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace Library.Infrastructure.Data.Context
 {
+    [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public sealed class LibraryDbContext : DbContext
     {
         public LibraryDbContext() : base("name=LibraryDbConnection")
         {
+            Database.SetInitializer(new CreateDatabaseIfNotExists<LibraryDbContext>());
         }
 
         public DbSet<Book> Books { get; set; }
