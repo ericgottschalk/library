@@ -21,6 +21,7 @@ namespace Library.Infrastructure.Data.Context
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
+            modelBuilder.Configurations.Add(new AuthorMapping());
             modelBuilder.Configurations.Add(new BookMapping());
             modelBuilder.Configurations.Add(new MemberMapping());
             modelBuilder.Configurations.Add(new RentalMapping());

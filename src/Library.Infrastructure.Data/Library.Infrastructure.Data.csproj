@@ -117,10 +117,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\LibraryDbContext.cs" />
-    <Compile Include="Mapping\BaseMapping.cs" />
+    <Compile Include="Mapping\AuthorMapping.cs" />
+    <Compile Include="Mapping\Commom\BaseMapping.cs" />
     <Compile Include="Mapping\BookMapping.cs" />
     <Compile Include="Mapping\MemberMapping.cs" />
     <Compile Include="Mapping\RentalMapping.cs" />
+    <Compile Include="Migrations\202408040059552_v1.cs" />
+    <Compile Include="Migrations\202408040059552_v1.Designer.cs">
+      <DependentUpon>202408040059552_v1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -136,6 +141,11 @@
       <Project>{AC0CB4C8-F0F0-4FC5-B35B-F110499EA1FC}</Project>
       <Name>Library.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202408040059552_v1.resx">
+      <DependentUpon>202408040059552_v1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

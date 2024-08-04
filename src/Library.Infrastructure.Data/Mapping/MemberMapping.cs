@@ -1,4 +1,5 @@
 ﻿using Library.Domain.Entities;
+using Library.Infrastructure.Data.Mapping.Commom;
 
 namespace Library.Infrastructure.Data.Mapping
 {
@@ -20,6 +21,9 @@ namespace Library.Infrastructure.Data.Mapping
                 .IsRequired()
                 .HasMaxLength(255)
                 .HasColumnName("name");
+
+            HasIndex(m => m.Email)
+                .IsUnique();
 
             ToTable("member");
         }

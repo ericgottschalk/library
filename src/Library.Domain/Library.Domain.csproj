@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Commom\Entity.cs" />
     <Compile Include="Commom\IRepository.cs" />
+    <Compile Include="Entities\Author.cs" />
     <Compile Include="Entities\Book.cs" />
     <Compile Include="Entities\Member.cs" />
     <Compile Include="Entities\Rental.cs" />

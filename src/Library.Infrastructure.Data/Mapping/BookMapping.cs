@@ -1,8 +1,9 @@
 ﻿using Library.Domain.Entities;
+using Library.Infrastructure.Data.Mapping.Commom;
 
 namespace Library.Infrastructure.Data.Mapping
 {
-    internal class BookMapping : BaseMapping<Book>
+    internal sealed class BookMapping : BaseMapping<Book>
     {
         public BookMapping()
         {
@@ -16,11 +17,6 @@ namespace Library.Infrastructure.Data.Mapping
                 .HasMaxLength(4096)
                 .HasColumnName("summary");
 
-            Property(b => b.Author)
-                .IsRequired()
-                .HasMaxLength(255)
-                .HasColumnName("author");
-
             Property(b => b.ISBN)
                 .IsRequired()
                 .HasMaxLength(20)
@@ -29,6 +25,11 @@ namespace Library.Infrastructure.Data.Mapping
             Property(b => b.Year)
                 .IsRequired()
                 .HasColumnName("year");
+
+            Property(l => l.AuthorId).IsRequired().HasColumnName("author_id");
+            HasRequired(l => l.Author)
+                .WithMany(m => m.Books)
+                .HasForeignKey(l => l.AuthorId);
 
             ToTable("book");
         }

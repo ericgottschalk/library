@@ -1,12 +1,13 @@
 ﻿using Library.Domain.Commom;
 using System.Data.Entity.ModelConfiguration;
 
-namespace Library.Infrastructure.Data.Mapping
+namespace Library.Infrastructure.Data.Mapping.Commom
 {
     internal abstract class BaseMapping<TEntity> : EntityTypeConfiguration<TEntity> where TEntity : Entity
     {
         public BaseMapping()
         {
+            Property(b => b.Id).IsRequired().HasColumnName("id");
             HasKey(b => b.Id);
 
             Property(b => b.IsActive)

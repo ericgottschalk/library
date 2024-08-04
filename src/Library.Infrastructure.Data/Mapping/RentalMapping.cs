@@ -1,4 +1,5 @@
 ﻿using Library.Domain.Entities;
+using Library.Infrastructure.Data.Mapping.Commom;
 
 namespace Library.Infrastructure.Data.Mapping
 {
