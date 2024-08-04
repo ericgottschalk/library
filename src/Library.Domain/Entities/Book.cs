@@ -1,4 +1,6 @@
 ﻿using Library.Domain.Commom;
+using Library.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,12 +12,13 @@ namespace Library.Domain.Entities
         {
         }
 
-        public Book(string title, string summary, string isbn, int year, Author author, Publisher publisher)
+        public Book(string title, string summary, string isbn, BookLanguageEnum language, DateTime publicationDate, Author author, Publisher publisher)
         {
             Title = title;
             Summary = summary;
             ISBN = isbn;
-            Year = year;
+            Language = language;
+            PublicationDate = publicationDate;
             Author = author;
             AuthorId = author.Id;
             Publisher = publisher;
@@ -29,7 +32,9 @@ namespace Library.Domain.Entities
 
         public string ISBN { get; private set; }
 
-        public int Year { get; private set; }
+        public BookLanguageEnum Language { get; private set; }
+
+        public DateTime PublicationDate { get; private set; }
 
         public long AuthorId { get; private set; }
         public Author Author { get; private set; }

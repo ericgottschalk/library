@@ -48,6 +48,7 @@
     <Compile Include="Entities\Member.cs" />
     <Compile Include="Entities\Publisher.cs" />
     <Compile Include="Entities\Rental.cs" />
+    <Compile Include="Enums\BookLanguageEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IBookRepository.cs" />
     <Compile Include="Repositories\IMemberRepository.cs" />

@@ -22,9 +22,13 @@ namespace Library.Infrastructure.Data.Mapping
                 .HasMaxLength(20)
                 .HasColumnName("isbn");
 
-            Property(b => b.Year)
+            Property(b => b.Language)
                 .IsRequired()
-                .HasColumnName("year");
+                .HasColumnName("language");
+
+            Property(b => b.PublicationDate)
+                .IsRequired()
+                .HasColumnName("publication_date");
 
             Property(l => l.AuthorId).IsRequired().HasColumnName("author_id");
             HasRequired(l => l.Author)
