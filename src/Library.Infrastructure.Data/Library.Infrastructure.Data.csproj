@@ -121,10 +121,11 @@
     <Compile Include="Mapping\Commom\BaseMapping.cs" />
     <Compile Include="Mapping\BookMapping.cs" />
     <Compile Include="Mapping\MemberMapping.cs" />
+    <Compile Include="Mapping\PublisherMapping.cs" />
     <Compile Include="Mapping\RentalMapping.cs" />
-    <Compile Include="Migrations\202408040059552_v1.cs" />
-    <Compile Include="Migrations\202408040059552_v1.Designer.cs">
-      <DependentUpon>202408040059552_v1.cs</DependentUpon>
+    <Compile Include="Migrations\202408040116027_v1.cs" />
+    <Compile Include="Migrations\202408040116027_v1.Designer.cs">
+      <DependentUpon>202408040116027_v1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -143,8 +144,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202408040059552_v1.resx">
-      <DependentUpon>202408040059552_v1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202408040116027_v1.resx">
+      <DependentUpon>202408040116027_v1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

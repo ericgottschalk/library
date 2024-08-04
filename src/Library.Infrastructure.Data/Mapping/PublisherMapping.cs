@@ -3,16 +3,16 @@ using Library.Infrastructure.Data.Mapping.Commom;
 
 namespace Library.Infrastructure.Data.Mapping
 {
-    internal sealed class AuthorMapping : BaseMapping<Author>
+    internal sealed class PublisherMapping : BaseMapping<Publisher>
     {
-        public AuthorMapping()
+        public PublisherMapping()
         {
             Property(b => b.Name)
                 .IsRequired()
                 .HasMaxLength(255)
                 .HasColumnName("name");
 
-            ToTable("author");
+            ToTable("publisher");
         }
     }
 }

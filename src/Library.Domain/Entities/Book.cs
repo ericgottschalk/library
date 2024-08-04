@@ -10,7 +10,7 @@ namespace Library.Domain.Entities
         {
         }
 
-        public Book(string title, string summary, string isbn, int year, Author author)
+        public Book(string title, string summary, string isbn, int year, Author author, Publisher publisher)
         {
             Title = title;
             Summary = summary;
@@ -18,6 +18,8 @@ namespace Library.Domain.Entities
             Year = year;
             Author = author;
             AuthorId = author.Id;
+            Publisher = publisher;
+            PublisherId = publisher.Id;
             Rentals = new List<Rental>();
         }
 
@@ -31,6 +33,9 @@ namespace Library.Domain.Entities
 
         public long AuthorId { get; private set; }
         public Author Author { get; private set; }
+
+        public long PublisherId { get; private set; }
+        public Publisher Publisher { get; private set; }
 
         public ICollection<Rental> Rentals { get; private set; }
 

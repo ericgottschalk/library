@@ -17,16 +17,31 @@
                         isbn = c.String(nullable: false, maxLength: 20, storeType: "nvarchar"),
                         year = c.Int(nullable: false),
                         author_id = c.Long(nullable: false),
+                        PublisherId = c.Long(nullable: false),
                         is_active = c.Boolean(nullable: false),
                         created_at = c.DateTime(nullable: false, precision: 0),
                         updated_at = c.DateTime(nullable: false, precision: 0),
                     })
                 .PrimaryKey(t => t.id)
-                .ForeignKey("dbo.Author", t => t.author_id, cascadeDelete: true)
-                .Index(t => t.author_id);
+                .ForeignKey("dbo.author", t => t.author_id, cascadeDelete: true)
+                .ForeignKey("dbo.publisher", t => t.PublisherId, cascadeDelete: true)
+                .Index(t => t.author_id)
+                .Index(t => t.PublisherId);
             
             CreateTable(
-                "dbo.Author",
+                "dbo.author",
+                c => new
+                    {
+                        id = c.Long(nullable: false, identity: true),
+                        name = c.String(nullable: false, maxLength: 255, storeType: "nvarchar"),
+                        is_active = c.Boolean(nullable: false),
+                        created_at = c.DateTime(nullable: false, precision: 0),
+                        updated_at = c.DateTime(nullable: false, precision: 0),
+                    })
+                .PrimaryKey(t => t.id);
+            
+            CreateTable(
+                "dbo.publisher",
                 c => new
                     {
                         id = c.Long(nullable: false, identity: true),
@@ -76,14 +91,17 @@
         {
             DropForeignKey("dbo.rental", "member_id", "dbo.member");
             DropForeignKey("dbo.rental", "book_id", "dbo.book");
-            DropForeignKey("dbo.book", "author_id", "dbo.Author");
+            DropForeignKey("dbo.book", "PublisherId", "dbo.publisher");
+            DropForeignKey("dbo.book", "author_id", "dbo.author");
             DropIndex("dbo.member", new[] { "email" });
             DropIndex("dbo.rental", new[] { "member_id" });
             DropIndex("dbo.rental", new[] { "book_id" });
+            DropIndex("dbo.book", new[] { "PublisherId" });
             DropIndex("dbo.book", new[] { "author_id" });
             DropTable("dbo.member");
             DropTable("dbo.rental");
-            DropTable("dbo.Author");
+            DropTable("dbo.publisher");
+            DropTable("dbo.author");
             DropTable("dbo.book");
         }
     }

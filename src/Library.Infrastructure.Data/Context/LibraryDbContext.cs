@@ -25,6 +25,7 @@ namespace Library.Infrastructure.Data.Context
             modelBuilder.Configurations.Add(new BookMapping());
             modelBuilder.Configurations.Add(new MemberMapping());
             modelBuilder.Configurations.Add(new RentalMapping());
+            modelBuilder.Configurations.Add(new PublisherMapping());
 
             base.OnModelCreating(modelBuilder);
         }
