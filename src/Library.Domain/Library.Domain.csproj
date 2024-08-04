@@ -50,8 +50,10 @@
     <Compile Include="Entities\Rental.cs" />
     <Compile Include="Enums\BookLanguageEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IAuthorRepository.cs" />
     <Compile Include="Repositories\IBookRepository.cs" />
     <Compile Include="Repositories\IMemberRepository.cs" />
+    <Compile Include="Repositories\IPublisherRepository.cs" />
     <Compile Include="Repositories\IRentalRepository.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
