@@ -61,7 +61,7 @@
             {
                 new Book("Gabriela, Cravo e Canela", "Romance que se passa na cidade de Ilhéus, Bahia, nos anos 1920, explorando o contraste entre a simplicidade da vida rural e a modernização da cidade.", "978-8520916525", BookLanguageEnum.Portuguese, new DateTime(1958, 1, 1), authors[17], publishers[0]),
                 new Book("Dona Flor e Seus Dois Maridos", "História de Dona Flor, uma mulher que se vê dividida entre o amor por seu falecido marido e o novo casamento com um homem muito diferente.", "978-8520918550", BookLanguageEnum.Portuguese, new DateTime(1966, 1, 1), authors[17], publishers[0]),
-                new Book("O Capitão de Longa Caminhada", "Narrativa sobre a vida do capitão de uma expedição pelo interior da Bahia, destacando a cultura e os conflitos da região.", "978-8520919007", BookLanguageEnum.Portuguese, new DateTime(1992, 1, 1), authors[0], publishers[17]),
+                new Book("O Capitão de Longa Caminhada", "Narrativa sobre a vida do capitão de uma expedição pelo interior da Bahia, destacando a cultura e os conflitos da região.", "978-8520919007", BookLanguageEnum.Portuguese, new DateTime(1992, 1, 1), authors[17], publishers[0]),
 
                 new Book("Dom Casmurro", "Clássico da literatura brasileira, narra a história de Bentinho e sua obsessão com a suspeita de traição de sua esposa Capitu.", "978-8520914386", BookLanguageEnum.Portuguese, new DateTime(1899, 1, 1), authors[18], publishers[1]),
                 new Book("Memórias Póstumas de Brás Cubas", "A obra é um romance do ponto de vista do defunto Brás Cubas, que narra sua vida e reflexões após a morte.", "978-8520911378", BookLanguageEnum.Portuguese, new DateTime(1881, 1, 1), authors[18], publishers[1]),
@@ -70,9 +70,7 @@
                 new Book("A Rua dos Cataventos", "Coleção de poesias que capturam a simplicidade e a melancolia da vida, característicos da obra de Quintana.", "978-8520912560", BookLanguageEnum.Portuguese, new DateTime(1966, 1, 1), authors[19], publishers[2]),
                 new Book("Poemas Escolhidos", "Uma seleção dos melhores poemas de Mário Quintana, destacando seu estilo único e sua sensibilidade poética.", "978-8520913338", BookLanguageEnum.Portuguese, new DateTime(1972, 1, 1), authors[19], publishers[2]),
                 new Book("Bôto: Poemas do Amor e da Morte", "Antologia poética que explora temas de amor e morte, com a marca distintiva da poesia de Quintana.", "978-8520913574", BookLanguageEnum.Portuguese, new DateTime(1987, 1, 1), authors[19], publishers[2])
-            };
-
-            context.Books.AddRange(books);
+            };           
 
             for (int i = 1; i <= 100; i++)
             {
@@ -91,6 +89,8 @@
 
                 books.Add(book);
             }
+
+            context.Books.AddRange(books);
 
             context.SaveChanges();
         }

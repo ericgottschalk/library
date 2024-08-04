@@ -7,6 +7,7 @@ namespace Library.Domain.Commom
         protected Entity()
         {
             IsActive = true;
+            CreatedAt = DateTime.UtcNow;
         }
 
         public long Id { get; private set; }
@@ -15,11 +16,11 @@ namespace Library.Domain.Commom
 
         public DateTime CreatedAt { get; private set; }
 
-        public DateTime UpdatedAt { get; private set; }
+        public DateTime? UpdatedAt { get; private set; }
 
         public void Stamp()
         {
-            UpdatedAt = DateTime.Now;
+            UpdatedAt = DateTime.UtcNow;
         }
 
         public void Activate()

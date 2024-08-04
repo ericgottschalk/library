@@ -15,7 +15,7 @@
                         name = c.String(nullable: false, maxLength: 255, storeType: "nvarchar"),
                         is_active = c.Boolean(nullable: false),
                         created_at = c.DateTime(nullable: false, precision: 0),
-                        updated_at = c.DateTime(nullable: false, precision: 0),
+                        updated_at = c.DateTime(precision: 0),
                     })
                 .PrimaryKey(t => t.id);
             
@@ -30,18 +30,19 @@
                         language = c.Int(nullable: false),
                         publication_date = c.DateTime(nullable: false, precision: 0),
                         author_id = c.Long(nullable: false),
-                        PublisherId = c.Long(nullable: false),
+                        publisher_id = c.Long(nullable: false),
                         is_active = c.Boolean(nullable: false),
                         created_at = c.DateTime(nullable: false, precision: 0),
-                        updated_at = c.DateTime(nullable: false, precision: 0),
+                        updated_at = c.DateTime(precision: 0),
                     })
                 .PrimaryKey(t => t.id)
                 .ForeignKey("dbo.author", t => t.author_id, cascadeDelete: true)
-                .ForeignKey("dbo.publisher", t => t.PublisherId, cascadeDelete: true)
-                .Index(t => t.title)
-                .Index(t => t.author_id)
-                .Index(t => t.PublisherId);
-            
+                .ForeignKey("dbo.publisher", t => t.publisher_id, cascadeDelete: true);
+
+            Sql("CREATE index  `IX_title` on `book` (`title`) using HASH");
+            Sql("CREATE index  `IX_author_id` on `book` (`author_id`) using HASH");
+            Sql("CREATE index  `IX_publisher_id` on `book` (`publisher_id`) using HASH");
+
             CreateTable(
                 "dbo.publisher",
                 c => new
@@ -50,7 +51,7 @@
                         name = c.String(nullable: false, maxLength: 255, storeType: "nvarchar"),
                         is_active = c.Boolean(nullable: false),
                         created_at = c.DateTime(nullable: false, precision: 0),
-                        updated_at = c.DateTime(nullable: false, precision: 0),
+                        updated_at = c.DateTime(precision: 0),
                     })
                 .PrimaryKey(t => t.id);
             
@@ -64,14 +65,15 @@
                         return_date = c.DateTime(precision: 0),
                         is_active = c.Boolean(nullable: false),
                         created_at = c.DateTime(nullable: false, precision: 0),
-                        updated_at = c.DateTime(nullable: false, precision: 0),
+                        updated_at = c.DateTime(precision: 0),
                     })
                 .PrimaryKey(t => t.id)
                 .ForeignKey("dbo.book", t => t.book_id, cascadeDelete: true)
-                .ForeignKey("dbo.member", t => t.member_id, cascadeDelete: true)
-                .Index(t => t.book_id)
-                .Index(t => t.member_id);
-            
+                .ForeignKey("dbo.member", t => t.member_id, cascadeDelete: true);
+
+            Sql("CREATE index  `IX_book_id` on `rental` (`book_id`) using HASH");
+            Sql("CREATE index  `IX_member_id` on `rental` (`member_id`) using HASH");
+
             CreateTable(
                 "dbo.member",
                 c => new
@@ -82,23 +84,23 @@
                         name = c.String(nullable: false, maxLength: 255, storeType: "nvarchar"),
                         is_active = c.Boolean(nullable: false),
                         created_at = c.DateTime(nullable: false, precision: 0),
-                        updated_at = c.DateTime(nullable: false, precision: 0),
+                        updated_at = c.DateTime(precision: 0),
                     })
-                .PrimaryKey(t => t.id)
-                .Index(t => t.email, unique: true);
-            
+                .PrimaryKey(t => t.id);
+
+            Sql("CREATE UNIQUE index  `IX_email` on `member` (`email`) using HASH");
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.rental", "member_id", "dbo.member");
             DropForeignKey("dbo.rental", "book_id", "dbo.book");
-            DropForeignKey("dbo.book", "PublisherId", "dbo.publisher");
+            DropForeignKey("dbo.book", "publisher_id", "dbo.publisher");
             DropForeignKey("dbo.book", "author_id", "dbo.author");
             DropIndex("dbo.member", new[] { "email" });
             DropIndex("dbo.rental", new[] { "member_id" });
             DropIndex("dbo.rental", new[] { "book_id" });
-            DropIndex("dbo.book", new[] { "PublisherId" });
+            DropIndex("dbo.book", new[] { "publisher_id" });
             DropIndex("dbo.book", new[] { "author_id" });
             DropIndex("dbo.book", new[] { "title" });
             DropTable("dbo.member");

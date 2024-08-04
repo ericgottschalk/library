@@ -19,7 +19,7 @@ namespace Library.Infrastructure.Data.Mapping.Commom
                 .HasColumnName("created_at");
 
             Property(b => b.UpdatedAt)
-                .IsRequired()
+                .IsOptional()
                 .HasColumnName("updated_at");
         }
     }

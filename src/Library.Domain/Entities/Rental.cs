@@ -27,7 +27,7 @@ namespace Library.Domain.Entities
 
         public void Return()
         {
-            ReturnDate = DateTime.Now;
+            ReturnDate = DateTime.UtcNow;
             Deactivate();
         }
     }

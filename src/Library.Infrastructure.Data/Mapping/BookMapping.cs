@@ -35,7 +35,14 @@ namespace Library.Infrastructure.Data.Mapping
                 .WithMany(m => m.Books)
                 .HasForeignKey(l => l.AuthorId);
 
+            Property(l => l.PublisherId).IsRequired().HasColumnName("publisher_id");
+            HasRequired(l => l.Publisher)
+                .WithMany(m => m.Books)
+                .HasForeignKey(l => l.PublisherId);
+
             HasIndex(l => l.Title);
+
+            Ignore(l => l.IsRented);
 
             ToTable("book");
         }
