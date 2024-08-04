@@ -35,6 +35,8 @@ namespace Library.Infrastructure.Data.Mapping
                 .WithMany(m => m.Books)
                 .HasForeignKey(l => l.AuthorId);
 
+            HasIndex(l => l.Title);
+
             ToTable("book");
         }
     }

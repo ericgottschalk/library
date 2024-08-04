@@ -9,7 +9,7 @@ namespace Library.Domain.Entities
         {
         }
 
-        private Author(string name)
+        public Author(string name)
         {
             Name = name;
             Books = new List<Book>();

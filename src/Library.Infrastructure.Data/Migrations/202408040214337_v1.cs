@@ -8,6 +8,18 @@
         public override void Up()
         {
             CreateTable(
+                "dbo.author",
+                c => new
+                    {
+                        id = c.Long(nullable: false, identity: true),
+                        name = c.String(nullable: false, maxLength: 255, storeType: "nvarchar"),
+                        is_active = c.Boolean(nullable: false),
+                        created_at = c.DateTime(nullable: false, precision: 0),
+                        updated_at = c.DateTime(nullable: false, precision: 0),
+                    })
+                .PrimaryKey(t => t.id);
+            
+            CreateTable(
                 "dbo.book",
                 c => new
                     {
@@ -26,20 +38,9 @@
                 .PrimaryKey(t => t.id)
                 .ForeignKey("dbo.author", t => t.author_id, cascadeDelete: true)
                 .ForeignKey("dbo.publisher", t => t.PublisherId, cascadeDelete: true)
+                .Index(t => t.title)
                 .Index(t => t.author_id)
                 .Index(t => t.PublisherId);
-            
-            CreateTable(
-                "dbo.author",
-                c => new
-                    {
-                        id = c.Long(nullable: false, identity: true),
-                        name = c.String(nullable: false, maxLength: 255, storeType: "nvarchar"),
-                        is_active = c.Boolean(nullable: false),
-                        created_at = c.DateTime(nullable: false, precision: 0),
-                        updated_at = c.DateTime(nullable: false, precision: 0),
-                    })
-                .PrimaryKey(t => t.id);
             
             CreateTable(
                 "dbo.publisher",
@@ -99,11 +100,12 @@
             DropIndex("dbo.rental", new[] { "book_id" });
             DropIndex("dbo.book", new[] { "PublisherId" });
             DropIndex("dbo.book", new[] { "author_id" });
+            DropIndex("dbo.book", new[] { "title" });
             DropTable("dbo.member");
             DropTable("dbo.rental");
             DropTable("dbo.publisher");
-            DropTable("dbo.author");
             DropTable("dbo.book");
+            DropTable("dbo.author");
         }
     }
 }
