@@ -25,6 +25,13 @@ namespace Library.Domain.Entities
             Rentals = new List<Rental>();
         }
 
+        public Book(string title, string summary, string isbn, BookLanguageEnum language, DateTime publicationDate, Author author, Publisher publisher)
+            : this(title, summary, isbn, language, publicationDate, author.Id, publisher.Id)
+        {
+            Author = author;
+            Publisher = publisher;
+        }
+
         public string Title { get; private set; }
 
         public string Summary { get; private set; }

@@ -1,13 +1,14 @@
-﻿using System;
+﻿using Library.Application.Services;
+using System;
 using System.Security.Cryptography;
 
-public static class PasswordHelper
+public class PasswordService : IPasswordService
 {
     private const int SaltSize = 16;
     private const int HashSize = 20;
     private const int Iterations = 10000;
 
-    public static string HashPassword(string password)
+    public string HashPassword(string password)
     {
         var salt = new byte[SaltSize];
 
@@ -25,7 +26,7 @@ public static class PasswordHelper
         return Convert.ToBase64String(hashBytes);
     }
 
-    public static bool VerifyPassword(string password, string storedHash)
+    public bool VerifyPassword(string password, string storedHash)
     {
         var hashBytes = Convert.FromBase64String(storedHash);
 

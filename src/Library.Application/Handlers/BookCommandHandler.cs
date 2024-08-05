@@ -28,6 +28,14 @@ namespace Library.Application.Handlers
             _rentalRepository = new RentalRepository();
         }
 
+        public BookCommandHandler(IBookRepository bookRepository, IAuthorRepository authorRepository, IPublisherRepository publisherRepository, IRentalRepository rentalRepository)
+        {
+            _bookRepository = bookRepository;
+            _authorRepository = authorRepository;
+            _publisherRepository = publisherRepository;
+            _rentalRepository = rentalRepository;
+        }
+
         public async Task<SearchBookCommandResult> Handle(SearchBookCommand request, CancellationToken cancellationToken)
         {
             var books = await _bookRepository.SearchAsync(request.Title, request.ISBN, request.AuthorId, request.PublisherId);

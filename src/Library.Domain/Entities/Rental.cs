@@ -15,6 +15,13 @@ namespace Library.Domain.Entities
             MemberId = memberId;
         }
 
+        public Rental(Book book, Member member)
+            : this(book.Id, member.Id)
+        {
+            Book = book;
+            Member = member;
+        }
+
         public long BookId { get; private set; }
         public Book Book { get; private set; }
 
