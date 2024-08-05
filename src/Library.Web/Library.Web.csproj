@@ -184,7 +184,9 @@
     <Compile Include="Authorization\SessionControl.cs" />
     <Compile Include="Authorization\SignedMember.cs" />
     <Compile Include="Controllers\BookController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
+    <Compile Include="Filters\GlobalExceptionFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -193,6 +195,7 @@
     <Compile Include="Models\Book\BookViewModel.cs" />
     <Compile Include="Models\Book\BookFilterViewModel.cs" />
     <Compile Include="Models\Book\BookSearchViewModel.cs" />
+    <Compile Include="Models\Error\ErrorViewModel.cs" />
     <Compile Include="Models\Member\LoginViewModel.cs" />
     <Compile Include="Models\Member\MemberViewModel.cs" />
     <Compile Include="Models\Member\RegisterViewModel.cs" />
@@ -219,7 +222,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Filters\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Library.Application\Library.Application.csproj">

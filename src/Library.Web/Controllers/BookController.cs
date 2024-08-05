@@ -39,7 +39,7 @@ namespace Library.Web.Controllers
 
             if (result == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("NotFound", "Error");
             }
 
             return View(BookMapping.Map(result));

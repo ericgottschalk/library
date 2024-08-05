@@ -1,8 +1,22 @@
-@model System.Web.Mvc.HandleErrorInfo
+@model Library.Web.Models.Error.ErrorViewModel
 
-@{
-    ViewBag.Title = "Error";
-}
-
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Error</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/Site.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>An error occurred</h1>
+        <div>
+            <h2>@Model.Title</h2>
+            <p>@Model.Message</p>
+            @if (Model.StackTrace != null)
+            {
+                <pre>@Model.StackTrace</pre>
+            }
+        </div>
+    </div>
+</body>
+</html>
