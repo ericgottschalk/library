@@ -11,17 +11,20 @@ using System.Threading.Tasks;
 namespace Library.Application.Handlers
 {
     public sealed class BookCommandHandler : IRequestHandler<SearchBookCommand, SearchBookCommandResult>,
-        IRequestHandler<GetBookCommand, BookCommandResult>
+        IRequestHandler<GetBookCommand, BookCommandResult>,
+        IRequestHandler<RentBookCommand, RentBookCommandResult>
     {
         private readonly IBookRepository _bookRepository;
         private readonly IAuthorRepository _authorRepository;
         private readonly IPublisherRepository _publisherRepository;
+        private readonly IRentalRepository _rentalRepository;
 
         public BookCommandHandler()
         {
             _bookRepository = new BookRepository();
             _authorRepository = new AuthorRepository();
             _publisherRepository = new PublisherRepository();
+            _rentalRepository = new RentalRepository();
         }
 
         public async Task<SearchBookCommandResult> Handle(SearchBookCommand request, CancellationToken cancellationToken)
@@ -43,6 +46,29 @@ namespace Library.Application.Handlers
             var book = await _bookRepository.GetAsync(request.Id);
 
             return Map(book);
+        }
+
+        public async Task<RentBookCommandResult> Handle(RentBookCommand request, CancellationToken cancellationToken)
+        {
+            var book = await _bookRepository.GetAsync(request.BookId);
+
+            if (book == null)
+            {
+                return new RentBookCommandResult(false, "Book not found.");
+            }
+
+            var unavailable = await _rentalRepository.AnyActiveByBookAsync(request.BookId);
+
+            if (unavailable)
+            {
+                return new RentBookCommandResult(false, "The book is unavailable.");
+            }
+
+            var rental = new Rental(book.Id, request.MemberId);
+
+            await _rentalRepository.CreateAsync(rental);
+
+            return new RentBookCommandResult(true, string.Empty);
         }
 
         private BookCommandResult Map(Book book)

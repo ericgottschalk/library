@@ -6,5 +6,7 @@
         public string ISBN { get; set; }
         public long? AuthorId { get; set; }
         public long? PublisherId { get; set; }
+
+        public string ErrorMessage { get; set; }
     }
 }

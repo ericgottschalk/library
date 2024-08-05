@@ -12,7 +12,12 @@
 }
 else
 {
-    @Html.ActionLink("Rent", "Rent", new { id = Model.Id }, new { @class = "btn-link" })
+    using (Html.BeginForm("Rent", "Book", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("bookId", Model.Id)
+        <button type="submit" class="btn-link">Rent</button>
+    }
 }
 
 <div class="book-details">

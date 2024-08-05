@@ -72,8 +72,8 @@ namespace Library.Application.Handlers
                 book.Title,
                 book.ISBN,
                 book.Language.ToString(),
-                book.Author.Name,
-                book.Publisher.Name,
+                book.Author != null ? book.Author.Name : null,
+                book.Publisher != null ? book.Publisher.Name : null,
                 book.IsRented,
                 book.Summary,
                 book.PublicationDate);

@@ -45,5 +45,18 @@ namespace Library.Web.Controllers
 
             return View(BookMapping.Map(result));
         }
+
+        [HttpPost]
+        public async Task<ActionResult> Rent(long bookId, CancellationToken cancellationToken)
+        {
+            var result = await _handler.Handle(new RentBookCommand(bookId, SessionControl.SingedMember.Id), cancellationToken);
+
+            if (!result.Success)
+            {
+                return RedirectToAction("Index", new BookFilterViewModel { ErrorMessage = result.Message });
+            }
+
+            return RedirectToAction("Member", "Member");
+        }
     }
 }

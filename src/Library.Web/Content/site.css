@@ -15,7 +15,7 @@ h2 {
     color: #333;
 }
 
-form {
+.form {
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -23,7 +23,7 @@ form {
     margin-bottom: 20px;
 }
 
-    form div {
+    .form div {
         margin-bottom: 15px;
     }
 

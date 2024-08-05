@@ -7,7 +7,7 @@
 
 <h2>Books</h2>
 
-@using (Html.BeginForm("Index", "Book", FormMethod.Get))
+@using (Html.BeginForm("Index", "Book", FormMethod.Get, new { @class = "form" }))
 {
     <div>
         <div>
@@ -33,6 +33,11 @@
             <button type="submit">Search</button>
         </div>
     </div>
+}
+
+@if (!string.IsNullOrWhiteSpace(Model.SearchModel.ErrorMessage))
+{
+    <span class="text-danger">Model.SearchModel.ErrorMessage</span>
 }
 
 <div>
@@ -75,16 +80,21 @@
                                 }
                                 else
                                 {
-                                    @Html.ActionLink("Rent", "Rent", new { id = book.Id }, new { @class = "btn-link" })
+                                    using (Html.BeginForm("Rent", "Book", FormMethod.Post))
+                                    {
+                                        @Html.AntiForgeryToken() 
+                                        @Html.Hidden("bookId", book.Id)
+                                        <button type="submit" class="btn-link">Rent</button>
+                                    }
                                 }
                             </td>
                             <td>
                                 @Html.ActionLink("Details", "Details", new { id = book.Id }, new { @class = "btn-link" })
                             </td>
                         </tr>
-                     }
+                    }
                 }
-                </tbody>
+            </tbody>
         </table>
     </div>
 </div>

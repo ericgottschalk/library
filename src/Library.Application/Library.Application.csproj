@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\Book\GetBookCommand.cs" />
+    <Compile Include="Commands\Book\RentBookCommand.cs" />
     <Compile Include="Commands\Book\SearchBookCommand.cs" />
     <Compile Include="Commands\Member\GetMemberCommand.cs" />
     <Compile Include="Commands\Member\LoginCommand.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Results\Book\AuthorCommandResult.cs" />
     <Compile Include="Results\Book\BookCommandResult.cs" />
     <Compile Include="Results\Book\PublisherCommandResult.cs" />
+    <Compile Include="Results\Book\RentBookCommandResult.cs" />
     <Compile Include="Results\Book\SearchBookCommandResult.cs" />
     <Compile Include="Results\Member\LoginCommandResult.cs" />
     <Compile Include="Results\Member\MemberCommandResult.cs" />

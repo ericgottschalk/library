@@ -15,7 +15,8 @@ namespace Library.Infrastructure.Data.Repositories
             using (var context = new LibraryDbContext())
             {
                 return await context.Members
-                    .Include(m => m.Rentals.Select(r => r.Book))
+                    .Include(m => m.Rentals.Select(r => r.Book.Author))
+                    .Include(m => m.Rentals.Select(r => r.Book.Publisher))
                     .FirstOrDefaultAsync(m => m.Id == id);
             }
         }
