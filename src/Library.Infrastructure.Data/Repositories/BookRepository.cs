@@ -1,11 +1,14 @@
 ﻿using Dapper;
 using Library.Domain.Entities;
 using Library.Domain.Repositories;
+using Library.Infrastructure.Data.Context;
 using Library.Infrastructure.Data.Repositories.Commom;
 using MySqlConnector;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Threading.Tasks;
+using System.Data.Entity;
+using System.Linq;
 
 namespace Library.Infrastructure.Data.Repositories
 {
@@ -16,6 +19,19 @@ namespace Library.Infrastructure.Data.Repositories
         public BookRepository()
         {
             _connectionString = ConfigurationManager.ConnectionStrings["LibraryDbConnection"].ConnectionString;
+        }
+
+        public override async Task<Book> GetAsync(long id)
+        {
+            using (var context = new LibraryDbContext())
+            {
+                return await context.Books
+                    .Include(b => b.Author)
+                    .Include(b => b.Publisher)
+                    .Include(b => b.Rentals)
+                    .Where(b => b.IsActive) 
+                    .FirstOrDefaultAsync(b => b.Id == id);
+            }
         }
 
         public async Task<IEnumerable<Book>> SearchAsync(string title, string isbn, long? authorId, long? publisherId)

@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 
 namespace Library.Application.Handlers
 {
-    public sealed class BookCommandHandler : IRequestHandler<SearchBookCommand, SearchBookCommandResult>
+    public sealed class BookCommandHandler : IRequestHandler<SearchBookCommand, SearchBookCommandResult>,
+        IRequestHandler<GetBookCommand, BookCommandResult>
     {
         private readonly IBookRepository _bookRepository;
         private readonly IAuthorRepository _authorRepository;
@@ -37,8 +38,18 @@ namespace Library.Application.Handlers
             return new SearchBookCommandResult(booksResult, authorsResult, publishersResult);
         }
 
-        private BookCommandResult Map(Book book) 
+        public async Task<BookCommandResult> Handle(GetBookCommand request, CancellationToken cancellationToken)
         {
+            var book = await _bookRepository.GetAsync(request.Id);
+
+            return Map(book);
+        }
+
+        private BookCommandResult Map(Book book)
+        {
+            if (book == null)
+                return null;
+
             return new BookCommandResult(
                 book.Id,
                 book.Title,
@@ -46,7 +57,9 @@ namespace Library.Application.Handlers
                 book.Language.ToString(),
                 book.Author.Name,
                 book.Publisher.Name,
-                book.IsRented);
+                book.IsRented,
+                book.Summary,
+                book.PublicationDate);
         }
 
         private AuthorCommandResult Map(Author author)
@@ -54,7 +67,7 @@ namespace Library.Application.Handlers
             return new AuthorCommandResult(author.Id, author.Name);
         }
 
-        private PublisherCommandResult Map(Publisher publisher) 
+        private PublisherCommandResult Map(Publisher publisher)
         {
             return new PublisherCommandResult(publisher.Id, publisher.Name);
         }

@@ -3,6 +3,7 @@ using Library.Application.Handlers;
 using Library.Web.Authorization;
 using Library.Web.Mapping;
 using Library.Web.Models.Book;
+using MySqlX.XDevAPI.Common;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -30,6 +31,19 @@ namespace Library.Web.Controllers
             var result = await _handler.Handle(new SearchBookCommand(searchModel.Title, searchModel.ISBN, searchModel.AuthorId, searchModel.PublisherId), cancellationToken);
 
             return View(BookMapping.Map(searchModel, result));
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Details(long id, CancellationToken cancellationToken)
+        {
+            var result = await _handler.Handle(new GetBookCommand(id), cancellationToken);
+
+            if (result == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(BookMapping.Map(result));
         }
     }
 }

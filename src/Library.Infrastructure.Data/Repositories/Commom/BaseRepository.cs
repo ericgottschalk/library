@@ -1,12 +1,14 @@
 ﻿using Library.Domain.Commom;
 using Library.Infrastructure.Data.Context;
+using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Library.Infrastructure.Data.Repositories.Commom
 {
     public abstract class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : Entity
     {
-        public async Task CreateAsync(TEntity entity)
+        public virtual async Task CreateAsync(TEntity entity)
         {
             using (var context = new LibraryDbContext())
             {
@@ -15,15 +17,17 @@ namespace Library.Infrastructure.Data.Repositories.Commom
             }
         }
 
-        public async Task<TEntity> GetAsync(long id)
+        public virtual async Task<TEntity> GetAsync(long id)
         {
             using (var context = new LibraryDbContext())
             {
-                return await context.Set<TEntity>().FindAsync(id);
+                return await context.Set<TEntity>()
+                    .Where(b => b.IsActive)
+                    .FirstOrDefaultAsync(b => b.Id == id);
             }
         }
 
-        public async Task UpdateAsync(TEntity entity)
+        public virtual async Task UpdateAsync(TEntity entity)
         {
             using (var context = new LibraryDbContext())
             {

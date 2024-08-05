@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\Book\GetBookCommand.cs" />
     <Compile Include="Commands\Book\SearchBookCommand.cs" />
     <Compile Include="Commands\Member\LoginCommand.cs" />
     <Compile Include="Commands\Member\RegisterCommand.cs" />

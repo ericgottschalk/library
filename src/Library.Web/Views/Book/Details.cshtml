@@ -1,0 +1,27 @@
+﻿@model Library.Web.Models.Book.BookDetailsViewModel
+
+@{
+    ViewBag.Title = "Books";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Title</h2>
+@if (Model.IsRented)
+{
+    <span class="unavailable">Unavailable</span>
+}
+else
+{
+    @Html.ActionLink("Rent", "Rent", new { id = Model.Id }, new { @class = "btn-link" })
+}
+
+<div class="book-details">
+    <p><strong>Summary:</strong> @Model.Summary</p>
+    <p><strong>ISBN:</strong> @Model.ISBN</p>
+    <p><strong>Language:</strong> @Model.Language</p>
+    <p><strong>Author:</strong> @Model.AuthorName</p>
+    <p><strong>Publisher:</strong> @Model.PublisherName</p>
+    <p><strong>Publication Date:</strong> @Model.PublicationDate.ToShortDateString()</p>
+</div>
+
+@Html.ActionLink("Back to List", "Index")
