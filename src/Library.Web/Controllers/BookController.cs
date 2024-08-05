@@ -3,7 +3,6 @@ using Library.Application.Handlers;
 using Library.Web.Authorization;
 using Library.Web.Mapping;
 using Library.Web.Models.Book;
-using MySqlX.XDevAPI.Common;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -55,6 +54,14 @@ namespace Library.Web.Controllers
             {
                 return RedirectToAction("Index", new BookFilterViewModel { ErrorMessage = result.Message });
             }
+
+            return RedirectToAction("Member", "Member");
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Return(long bookId, CancellationToken cancellationToken)
+        {
+            var result = await _handler.Handle(new ReturnBookCommand(bookId, SessionControl.SingedMember.Id), cancellationToken);
 
             return RedirectToAction("Member", "Member");
         }

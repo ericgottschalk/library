@@ -7,5 +7,6 @@ namespace Library.Domain.Repositories
     public interface IRentalRepository : IRepository<Rental>
     {
         Task<bool> AnyActiveByBookAsync(long bookId);
+        Task<Rental> GetActiveByBookMemberAsync(long bookId, long memberId);
     }
 }

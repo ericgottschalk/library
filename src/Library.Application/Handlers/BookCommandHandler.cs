@@ -12,7 +12,8 @@ namespace Library.Application.Handlers
 {
     public sealed class BookCommandHandler : IRequestHandler<SearchBookCommand, SearchBookCommandResult>,
         IRequestHandler<GetBookCommand, BookCommandResult>,
-        IRequestHandler<RentBookCommand, RentBookCommandResult>
+        IRequestHandler<RentBookCommand, RentBookCommandResult>,
+        IRequestHandler<ReturnBookCommand, ReturnBookCommandResult>
     {
         private readonly IBookRepository _bookRepository;
         private readonly IAuthorRepository _authorRepository;
@@ -69,6 +70,28 @@ namespace Library.Application.Handlers
             await _rentalRepository.CreateAsync(rental);
 
             return new RentBookCommandResult(true, string.Empty);
+        }
+
+        public async Task<ReturnBookCommandResult> Handle(ReturnBookCommand request, CancellationToken cancellationToken)
+        {
+            var book = await _bookRepository.GetAsync(request.BookId);
+
+            if (book == null)
+            {
+                return new ReturnBookCommandResult(false, "Book not found.");
+            }
+
+            var rental = await _rentalRepository.GetActiveByBookMemberAsync(request.BookId, request.MemberId);
+
+            if (rental == null)
+            {
+                return new ReturnBookCommandResult(false, "The book is not rented.");
+            }
+
+            rental.Deactivate();
+            await _rentalRepository.UpdateAsync(rental);
+
+            return new ReturnBookCommandResult(true, string.Empty);
         }
 
         private BookCommandResult Map(Book book)

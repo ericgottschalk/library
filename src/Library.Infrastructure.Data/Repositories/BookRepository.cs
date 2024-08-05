@@ -61,7 +61,7 @@ namespace Library.Infrastructure.Data.Repositories
                     r.is_active         AS IsActive
                 FROM 
                     book b
-                    LEFT JOIN rental r ON b.id = r.book_id
+                    LEFT JOIN rental r ON b.id = r.book_id and r.is_active = 1
                     INNER JOIN author a ON b.author_id = a.Id
                     INNER JOIN publisher p ON b.publisher_id = p.Id                
                 WHERE b.is_active=1";

@@ -19,5 +19,15 @@ namespace Library.Infrastructure.Data.Repositories
                     .AnyAsync(b => b.BookId == bookId);
             }
         }
+
+        public async Task<Rental> GetActiveByBookMemberAsync(long bookId, long memberId)
+        {
+            using (var context = new LibraryDbContext())
+            {
+                return await context.Rentals
+                    .Where(b => b.IsActive)
+                    .FirstOrDefaultAsync(b => b.BookId == bookId && b.MemberId == memberId);
+            }
+        }
     }
 }

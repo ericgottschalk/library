@@ -43,7 +43,12 @@
                             <td>@book.AuthorName</td>
                             <td>@book.PublisherName</td>
                             <td>
-                                @Html.ActionLink("Return", "Return", "Book", new { id = book.Id }, new { @class = "btn-link" })
+                                @using (Html.BeginForm("Return", "Book", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.Hidden("bookId", book.Id)
+                                    <button type="submit" class="btn-link">Return</button>
+                                }
                             </td>
                         </tr>
                     }
