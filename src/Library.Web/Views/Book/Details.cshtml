@@ -7,27 +7,34 @@
 
 @Html.ActionLink("Back to List", "Index")
 
-<h2>@Model.Title</h2>
+<div class="title-actions">
+    <h2>@Model.Title</h2>
 
-@if (Model.IsRented)
-{
-    <span class="unavailable">Unavailable</span>
-}
-else
-{
-    using (Html.BeginForm("Rent", "Book", FormMethod.Post))
+    @if (Model.IsRented)
     {
-        @Html.AntiForgeryToken()
-        @Html.Hidden("bookId", Model.Id)
-        <button type="submit" class="btn-link">Rent</button>
+        <span class="unavailable">Unavailable</span>
     }
-}
+    else
+    {
+        using (Html.BeginForm("Rent", "Book", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Hidden("bookId", Model.Id)
+            <button type="submit" class="btn-link">Rent</button>
+        }
+    }
+</div>
 
 <div class="book-details">
-    <p><strong>Summary:</strong> @Model.Summary</p>
-    <p><strong>ISBN:</strong> @Model.ISBN</p>
-    <p><strong>Language:</strong> @Model.Language</p>
-    <p><strong>Author:</strong> @Model.AuthorName</p>
-    <p><strong>Publisher:</strong> @Model.PublisherName</p>
-    <p><strong>Publication Date:</strong> @Model.PublicationDate.ToShortDateString()</p>
+    <div class="book-details-content">
+        <img src="@Model.CoverUrl" alt="Book Cover" class="book-cover-image" />
+        <div class="book-info">
+            <p><strong>Summary:</strong> @Model.Summary</p>
+            <p><strong>ISBN:</strong> @Model.ISBN</p>
+            <p><strong>Language:</strong> @Model.Language</p>
+            <p><strong>Author:</strong> @Model.AuthorName</p>
+            <p><strong>Publisher:</strong> @Model.PublisherName</p>
+            <p><strong>Publication Date:</strong> @Model.PublicationDate.ToShortDateString()</p>
+        </div>
+    </div>
 </div>

@@ -13,5 +13,6 @@ namespace Library.Web.Models.Book
         public string Summary { get; set; }
         public DateTime PublicationDate { get; set; }
         public bool IsRented { get; set; }
+        public string CoverUrl { get; set; } = "https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781787550360/classic-book-cover-foiled-journal-9781787550360_hr.jpg";
     }
 }

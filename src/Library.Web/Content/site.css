@@ -258,3 +258,41 @@ body {
         margin: 0;
     }
 }
+
+.book-details {
+    margin: 20px;
+}
+
+.book-details-content {
+    display: flex;
+    align-items: flex-start;
+}
+
+.book-cover-image {
+    max-width: 200px;
+    margin-right: 20px;
+}
+
+.book-info {
+    max-width: 600px;
+}
+
+.title-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+    .title-actions h2 {
+        margin: 0;
+    }
+
+    .title-actions .unavailable {
+        color: red;
+        margin-left: 10px;
+    }
+
+    .title-actions .btn-link {
+        margin-left: 10px;
+    }
