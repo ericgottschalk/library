@@ -74,7 +74,7 @@
                 new Book("Bôto: Poemas do Amor e da Morte", "Antologia poética que explora temas de amor e morte, com a marca distintiva da poesia de Quintana.", "978-8520913574", BookLanguageEnum.Portuguese, new DateTime(1987, 1, 1), authors[19].Id, publishers[2].Id)
             };           
 
-            for (int i = 1; i <= 100; i++)
+            for (int i = 1; i <= 4; i++)
             {
                 var authorIndex = (i - 1) % authors.Length;
                 var publisherIndex = (i - 1) % publishers.Length;
