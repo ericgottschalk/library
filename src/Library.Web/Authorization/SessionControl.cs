@@ -6,21 +6,26 @@ namespace Library.Web.Authorization
 {
     public static class SessionControl
     {
-        private const string SINGED_MEMBER = "SINGED_MEMBER";
+        private const string SIGNED_MEMBER = "SIGNED_MEMBER";
 
-        public static SingedMember SingedMember
+        public static SignedMember SingedMember
         {
             get
             {
-                return HttpContext.Current.Session[SINGED_MEMBER] as SingedMember;
+                var signedMember = HttpContext.Current.Session[SIGNED_MEMBER];
+                
+                if (signedMember == null)
+                    return null;
+
+                return signedMember as SignedMember;
             }
         }
 
         public static void CreateMemberSession(LoginCommandResult member)
         {
-            var singedMember = new SingedMember(member.Id, member.Email);
+            var signedMember = new SignedMember(member.Id, member.Email);
             FormsAuthentication.SetAuthCookie(member.Email, true);
-            HttpContext.Current.Session[SINGED_MEMBER] = singedMember;
+            HttpContext.Current.Session[SIGNED_MEMBER] = signedMember;
         }
 
         public static void SignOut()

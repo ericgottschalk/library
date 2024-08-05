@@ -5,7 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@Html.ActionLink("Back to List", "Index")
+
 <h2>@Model.Title</h2>
+
 @if (Model.IsRented)
 {
     <span class="unavailable">Unavailable</span>
@@ -28,5 +31,3 @@ else
     <p><strong>Publisher:</strong> @Model.PublisherName</p>
     <p><strong>Publication Date:</strong> @Model.PublicationDate.ToShortDateString()</p>
 </div>
-
-@Html.ActionLink("Back to List", "Index")

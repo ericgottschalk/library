@@ -1,8 +1,8 @@
 ﻿namespace Library.Web.Authorization
 {
-    public sealed class SingedMember
+    public sealed class SignedMember
     {
-        public SingedMember(long id, string email)
+        public SignedMember(long id, string email)
         {
             Id = id;
             Email = email;

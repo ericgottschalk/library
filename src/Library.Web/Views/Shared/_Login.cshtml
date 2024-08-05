@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -16,14 +16,8 @@
                 &#9776;
             </button>
             <ul class="navbar-nav" id="navbar-nav">
-                <li><a href="/Member/Member">My membership</a></li>
-                <li>
-                    @using (Html.BeginForm("Logout", "Member", FormMethod.Post))
-                    {
-                        @Html.AntiForgeryToken()
-                        <button type="submit">Logout</button>
-                    }
-                </li>
+                <li><a href="/Member/Login">Login</a></li>
+                <li><a href="/Member/Register">Register</a></li>
             </ul>
         </nav>
     </header>

@@ -182,7 +182,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Authorization\AuthorizationAttribute.cs" />
     <Compile Include="Authorization\SessionControl.cs" />
-    <Compile Include="Authorization\SingedMember.cs" />
+    <Compile Include="Authorization\SignedMember.cs" />
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Global.asax.cs">
@@ -209,6 +209,7 @@
     <Content Include="Views\Book\Index.cshtml" />
     <Content Include="Views\Book\Details.cshtml" />
     <Content Include="Views\Member\Member.cshtml" />
+    <Content Include="Views\Shared\_Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
