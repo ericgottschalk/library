@@ -32,9 +32,7 @@ namespace Library.Application.Handlers
                 return null;
             }
 
-            var hash = request.Password;
-
-            if (member.Password == hash)
+            if (PasswordHelper.VerifyPassword(request.Password, member.Password))
             {
                 return new LoginCommandResult(member.Id, member.Email);
             }
@@ -44,7 +42,7 @@ namespace Library.Application.Handlers
 
         public async Task Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
-            var hash = request.Password;
+            var hash = PasswordHelper.HashPassword(request.Password);
 
             var member = new Member(request.Email, hash, request.Name);
 
