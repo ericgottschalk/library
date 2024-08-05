@@ -189,11 +189,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Mapping\BookMapping.cs" />
-    <Compile Include="Models\Book\BookDetailsViewModel.cs" />
-    <Compile Include="Models\Book\BookFilterViewModel.cs" />
+    <Compile Include="Mapping\MemberMapping.cs" />
     <Compile Include="Models\Book\BookViewModel.cs" />
+    <Compile Include="Models\Book\BookFilterViewModel.cs" />
     <Compile Include="Models\Book\BookSearchViewModel.cs" />
     <Compile Include="Models\Member\LoginViewModel.cs" />
+    <Compile Include="Models\Member\MemberViewModel.cs" />
     <Compile Include="Models\Member\RegisterViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -207,6 +208,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Book\Index.cshtml" />
     <Content Include="Views\Book\Details.cshtml" />
+    <Content Include="Views\Member\Member.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

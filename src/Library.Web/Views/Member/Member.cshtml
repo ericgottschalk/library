@@ -1,0 +1,54 @@
+@model Library.Web.Models.Member.MemberViewModel
+
+@{
+    ViewBag.Title = "Member";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Name</h2>
+<h2>@Model.Email</h2>
+
+@Html.ActionLink("Back to List", "Index", "Book")
+
+<div>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>ISBN</th>
+                    <th>Language</th>
+                    <th>Author</th>
+                    <th>Publisher</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Books == null || !Model.Books.Any())
+                {
+                    <tr>
+                        <td colspan="7" class="text-center">
+                            No books found.
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var book in Model.Books)
+                    {
+                        <tr>
+                            <td>@book.Title</td>
+                            <td>@book.ISBN</td>
+                            <td>@book.Language</td>
+                            <td>@book.AuthorName</td>
+                            <td>@book.PublisherName</td>
+                            <td>
+                                @Html.ActionLink("Return", "Return", "Book", new { id = book.Id }, new { @class = "btn-link" })
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

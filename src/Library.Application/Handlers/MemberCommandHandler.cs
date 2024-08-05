@@ -1,16 +1,20 @@
 ﻿using Library.Application.Commands.Member;
 using Library.Application.Results;
+using Library.Application.Results.Book;
+using Library.Application.Results.Member;
 using Library.Domain.Entities;
 using Library.Domain.Repositories;
 using Library.Infrastructure.Data.Repositories;
 using MediatR;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Library.Application.Handlers
 {
     public sealed class MemberCommandHandler : IRequestHandler<LoginCommand, LoginCommandResult>,
-        IRequestHandler<RegisterCommand>
+        IRequestHandler<RegisterCommand>,
+        IRequestHandler<GetMemberCommand, MemberCommandResult>
     {
         private readonly IMemberRepository _memberRepository;
 
@@ -45,6 +49,34 @@ namespace Library.Application.Handlers
             var member = new Member(request.Email, hash, request.Name);
 
             await _memberRepository.CreateAsync(member);
+        }
+
+        public async Task<MemberCommandResult> Handle(GetMemberCommand request, CancellationToken cancellationToken)
+        {
+            var member = await _memberRepository.GetAsync(request.Id);
+
+            if (member == null)
+            {
+                return null;
+            }
+
+            member.SetRentals(member.Rentals.Where(r => r.IsActive).ToList());
+
+            return new MemberCommandResult(member.Name, member.Email, member.Rentals.Select(t => Map(t.Book)));
+        }
+
+        private BookCommandResult Map(Book book)
+        {
+            return new BookCommandResult(
+                book.Id,
+                book.Title,
+                book.ISBN,
+                book.Language.ToString(),
+                book.Author.Name,
+                book.Publisher.Name,
+                book.IsRented,
+                book.Summary,
+                book.PublicationDate);
         }
     }
 }

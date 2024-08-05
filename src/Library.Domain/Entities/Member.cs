@@ -24,5 +24,10 @@ namespace Library.Domain.Entities
         public string Name { get; private set; }
 
         public ICollection<Rental> Rentals { get; private set; }
+
+        public void SetRentals(List<Rental> rentals)
+        {
+            Rentals = rentals;
+        }
     }
 }

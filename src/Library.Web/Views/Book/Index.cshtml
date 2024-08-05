@@ -50,30 +50,41 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var book in Model.Books)
+                @if (Model.Books == null || !Model.Books.Any())
                 {
                     <tr>
-                        <td>@book.Title</td>
-                        <td>@book.ISBN</td>
-                        <td>@book.Language</td>
-                        <td>@book.AuthorName</td>
-                        <td>@book.PublisherName</td>
-                        <td>
-                            @if (book.IsRented)
-                            {
-                                <span class="unavailable">Unavailable</span>
-                            }
-                            else
-                            {
-                                @Html.ActionLink("Rent", "Rent", new { id = book.Id }, new { @class = "btn-link" })
-                            }
-                        </td>
-                        <td>
-                            @Html.ActionLink("Details", "Details", new { id = book.Id }, new { @class = "btn-link" })
+                        <td colspan="7" class="text-center">
+                            No books found.
                         </td>
                     </tr>
                 }
-            </tbody>
+                else
+                {
+                    foreach (var book in Model.Books)
+                    {
+                        <tr>
+                            <td>@book.Title</td>
+                            <td>@book.ISBN</td>
+                            <td>@book.Language</td>
+                            <td>@book.AuthorName</td>
+                            <td>@book.PublisherName</td>
+                            <td>
+                                @if (book.IsRented)
+                                {
+                                    <span class="unavailable">Unavailable</span>
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Rent", "Rent", new { id = book.Id }, new { @class = "btn-link" })
+                                }
+                            </td>
+                            <td>
+                                @Html.ActionLink("Details", "Details", new { id = book.Id }, new { @class = "btn-link" })
+                            </td>
+                        </tr>
+                     }
+                }
+                </tbody>
         </table>
     </div>
 </div>

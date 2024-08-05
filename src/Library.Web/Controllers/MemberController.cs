@@ -1,6 +1,7 @@
 ﻿using Library.Application.Commands.Member;
 using Library.Application.Handlers;
 using Library.Web.Authorization;
+using Library.Web.Mapping;
 using Library.Web.Models.Member;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace Library.Web.Controllers
         {
             _handler = new MemberCommandHandler();
         }
-
+         
         [HttpGet]
         public ActionResult Login()
         {
@@ -65,6 +66,17 @@ namespace Library.Web.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        [Authorization]
+        public async Task<ActionResult> Member(CancellationToken cancellationToken)
+        {
+            var command = new GetMemberCommand(SessionControl.SingedMember.Id);
+
+            var result = await _handler.Handle(command, cancellationToken);
+
+            return View(MemberMapping.Map(result));
         }
 
 

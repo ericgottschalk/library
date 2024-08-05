@@ -174,3 +174,7 @@ tbody tr:hover {
     border: 1px solid #cc0000;
     border-radius: 4px;
 }
+
+.text-center {
+    text-align: center;
+}
