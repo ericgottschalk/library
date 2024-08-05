@@ -1,7 +1,10 @@
 @model Library.Web.Models.Member.LoginViewModel
 @{
     ViewBag.Title = "Login";
+    //Layout = "~/Views/Shared/_Login.cshtml";
 }
+
+<h2>Login</h2>
 
 @using (Html.BeginForm("Login", "Member", FormMethod.Post))
 {

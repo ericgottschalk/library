@@ -10,6 +10,7 @@ namespace Library.Domain.Entities
     {
         private Book()
         {
+            Rentals = new List<Rental>();
         }
 
         public Book(string title, string summary, string isbn, BookLanguageEnum language, DateTime publicationDate, long authorId, long publisherId)
@@ -48,6 +49,21 @@ namespace Library.Domain.Entities
             {
                 return Rentals.Any(t => t.IsActive);
             }
+        }
+
+        public void SetAuthor(Author author)
+        {
+            Author = author;
+        }
+
+        public void SetPublisher(Publisher publisher)
+        {
+            Publisher = publisher;
+        }
+
+        public void SetRentals(List<Rental> rentals)
+        {
+            Rentals = rentals;
         }
     }
 }

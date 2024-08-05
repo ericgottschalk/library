@@ -60,10 +60,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\Book\SearchBookCommand.cs" />
     <Compile Include="Commands\Member\LoginCommand.cs" />
     <Compile Include="Commands\Member\RegisterCommand.cs" />
+    <Compile Include="Handlers\BookCommandHandler.cs" />
     <Compile Include="Handlers\MemberCommandHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Results\Book\AuthorCommandResult.cs" />
+    <Compile Include="Results\Book\BookCommandResult.cs" />
+    <Compile Include="Results\Book\PublisherCommandResult.cs" />
+    <Compile Include="Results\Book\SearchBookCommandResult.cs" />
     <Compile Include="Results\Member\LoginCommandResult.cs" />
   </ItemGroup>
   <ItemGroup>

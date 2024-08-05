@@ -1,19 +1,15 @@
 ﻿body {
-}
-
-body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    margin: 0;
     padding: 0;
 }
 
-.container {
+/*.container {
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-}
+}*/
 
 h2 {
     color: #333;
@@ -39,7 +35,8 @@ label {
 
 input[type="text"],
 input[type="password"],
-input[type="email"] {
+input[type="email"],
+select {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
@@ -78,4 +75,102 @@ button {
     button {
         width: 100%;
     }
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-family: Arial, sans-serif;
+}
+
+thead {
+    background-color: #f4f4f4;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2a104;
+    color: white;
+    font-weight: bold;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+@media (max-width: 600px) {
+    table {
+        border: 0;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tbody, tr, td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+        td::before {
+            content: attr(data-label);
+            position: absolute;
+            left: 0;
+            width: 45%;
+            padding-left: 10px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+}
+
+.btn-link {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    border-radius: 4px; 
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+    .btn-link:hover {
+        background-color: #0056b3; 
+        border-color: #0056b3; 
+    }
+
+    .btn-link:active {
+        background-color: #004080;
+        border-color: #004080;
+    }
+
+.unavailable {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #cc0000;
+    border: 1px solid #cc0000;
+    border-radius: 4px;
 }

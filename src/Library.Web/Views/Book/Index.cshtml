@@ -1,7 +1,79 @@
-﻿
+﻿@model Library.Web.Models.Book.BookSearchViewModel
+
 @{
-    ViewBag.Title = "Book";
+    ViewBag.Title = "Books";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Book</h2>
+<h2>Books</h2>
 
+@using (Html.BeginForm("Index", "Book", FormMethod.Get))
+{
+    <div>
+        <div>
+            <h3>Search</h3>
+        </div>
+        <div>
+            <div>
+                @Html.LabelFor(m => m.SearchModel.Title)
+                @Html.TextBoxFor(m => m.SearchModel.Title)
+            </div>
+            <div>
+                @Html.LabelFor(m => m.SearchModel.ISBN)
+                @Html.TextBoxFor(m => m.SearchModel.ISBN)
+            </div>
+            <div>
+                @Html.LabelFor(m => m.SearchModel.AuthorId)
+                @Html.DropDownListFor(m => m.SearchModel.AuthorId, Model.Authors, "Select Author")
+            </div>
+            <div>
+                @Html.LabelFor(m => m.SearchModel.PublisherId)
+                @Html.DropDownListFor(m => m.SearchModel.PublisherId, Model.Publishers, "Select Publisher")
+            </div>
+            <button type="submit">Search</button>
+        </div>
+    </div>
+}
+
+<div>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>ISBN</th>
+                    <th>Language</th>
+                    <th>Author</th>
+                    <th>Publisher</th>
+                    <th>Rent</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var book in Model.Books)
+                {
+                    <tr>
+                        <td>@book.Title</td>
+                        <td>@book.ISBN</td>
+                        <td>@book.Language</td>
+                        <td>@book.AuthorName</td>
+                        <td>@book.PublisherName</td>
+                        <td>
+                            @if (book.IsRented)
+                            {
+                                <span class="unavailable">Unavailable</span>
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Rent", "Rent", new { id = book.Id }, new { @class = "btn-link" })
+                            }
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { id = book.Id }, new { @class = "btn-link" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
